@@ -28,27 +28,27 @@
 .stat-card h3 { font-size: 1rem; color: var(--text-secondary); margin-bottom: 5px; }
 .stat-card p { font-size: 2rem; font-weight: bold; margin: 0; color: var(--accent-color); }
 
-/* 2. Project Lead Card (Fixed Orientation) */
+/* 2. Project Lead Card (Resized to match Contributors) */
 .lead-container {
     display: flex;
     justify-content: center;
-    align-items: center; /* Ensures vertical centering */
+    align-items: center;
     margin-bottom: 50px;
     width: 100%;
 }
 
 .project-lead-card {
     background: linear-gradient(135deg, rgba(255, 165, 0, 0.1), rgba(255, 140, 0, 0.05));
-    border: 2px solid #FFA500; /* Solid Orange border */
-    padding: 40px;
-    border-radius: 20px;
+    border: 2px solid #FFA500; /* Keeps the distinct gold border */
+    padding: 25px 20px; /* Reduced padding to match contributor card */
+    border-radius: 15px; /* Reduced radius to match contributor card */
     text-align: center;
     position: relative;
-    max-width: 400px; /* Slightly wider */
-    width: 90%;
-    box-shadow: 0 10px 30px rgba(255, 165, 0, 0.15);
+    max-width: 260px; /* Reduced width to be equivalent to contributor card */
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(255, 165, 0, 0.15);
     transition: transform 0.3s ease;
-    margin: 0 auto; /* Force horizontal center */
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,30 +59,42 @@
 .lead-badge {
     background: #FFA500;
     color: #fff;
-    padding: 6px 18px;
+    padding: 4px 12px; /* Smaller badge */
     border-radius: 20px;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     box-shadow: 0 4px 10px rgba(255, 165, 0, 0.4);
 }
 
 .project-lead-card img {
-    width: 120px;
-    height: 120px;
+    width: 80px; /* Reduced from 120px to 80px (matches contributors) */
+    height: 80px;
     border-radius: 50%;
-    border: 4px solid #FFA500;
-    margin-bottom: 15px;
+    border: 3px solid #FFA500;
+    margin-bottom: 10px;
     object-fit: cover;
+}
+
+.project-lead-card h3 {
+    font-size: 1.1rem; /* Matched font size */
+    margin: 0 0 5px 0;
+    color: var(--text-primary);
+}
+
+.project-lead-card .role {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
 }
 
 /* 3. Contributors Grid */
 .contributors-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Fixed minimum width */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 25px;
-    min-height: 200px; /* Prevents layout shift during load */
+    min-height: 200px;
 }
 
 .contributor-card {
@@ -128,7 +140,7 @@
     padding: 6px 12px;
     border-radius: 20px;
     font-weight: 600;
-    margin-top: auto; /* Pushes to bottom of flex container */
+    margin-top: auto;
     display: inline-flex;
     align-items: center;
     gap: 5px;
