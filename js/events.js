@@ -1,21 +1,28 @@
+// PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
+const API_URL = "https://script.google.com/macros/s/AKfycbyeXctRmbj5DCCOqC9gA7B7tJVRxMA-N8r9lcbZjE48KR0QHacLmFStMPKthXZpuD11/exec"; 
+
 let allEvents = [];
 let currentPage = 1;
-const EVENTS_PER_PAGE = 6; // 3x2 Grid
+const EVENTS_PER_PAGE = 6; 
 
 document.addEventListener('DOMContentLoaded', () => {
     loadEvents();
     initOrganizeForm();
 });
 
-// 1. Load and Render Events with Pagination
+// 1. Load and Render Events from Google Sheets
 async function loadEvents() {
     const container = document.getElementById("events-container");
 
     try {
-        const res = await fetch("data/events.json");
-        if (!res.ok) throw new Error("Failed to load events");
+        container.innerHTML = `<p class="loading-msg">Connecting to database...</p>`;
+        
+        // Fetch from Google Apps Script
+        const res = await fetch(API_URL);
+        const data = await res.json();
 
-        allEvents = await res.json();
+        // Filter only 'Approved' events for display
+        allEvents = data.filter(event => event.status === "Approved");
         
         // Setup Countdown for the nearest upcoming event
         setupCountdown(allEvents);
@@ -24,8 +31,8 @@ async function loadEvents() {
         renderPage(1);
 
     } catch (error) {
-        console.error(error);
-        container.innerHTML = `<p class="error-msg">Unable to load events 😢</p>`;
+        console.error("Database Connection Failed:", error);
+        container.innerHTML = `<p class="error-msg">Unable to load events at this time.</p>`;
     }
 }
 
@@ -33,17 +40,16 @@ function renderPage(page) {
     const container = document.getElementById("events-container");
     container.innerHTML = "";
     
-    // Calculate slice
     const start = (page - 1) * EVENTS_PER_PAGE;
     const end = start + EVENTS_PER_PAGE;
     const eventsToShow = allEvents.slice(start, end);
 
     if(eventsToShow.length === 0) {
-        container.innerHTML = "<p>No events to show.</p>";
+        container.innerHTML = "<p>No upcoming events found.</p>";
         return;
     }
 
-    // Determine upcoming event for highlighting (if on page 1)
+    // Determine upcoming event logic
     const now = new Date();
     const upcoming = allEvents
         .filter(e => new Date(e.date) > now)
@@ -54,17 +60,20 @@ function renderPage(page) {
         const card = document.createElement("div");
         card.classList.add("event-card");
         
-        // Highlight logic
         const isNext = upcoming && event === upcoming;
         if (isNext) card.style.borderColor = "var(--accent-color)";
+
+        // Format Date nicely
+        const dateObj = new Date(event.date);
+        const dateStr = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
         card.innerHTML = `
             ${isNext ? '<div style="color:var(--accent-color); font-weight:bold; font-size:0.8rem; margin-bottom:5px;">🔥 UP NEXT</div>' : ''}
             <h2>${event.title}</h2>
-            <p class="event-date"><i class="fa-solid fa-calendar"></i> ${event.date}</p>
+            <p class="event-date"><i class="fa-solid fa-calendar"></i> ${dateStr}</p>
             <p class="event-location"><i class="fa-solid fa-location-dot"></i> ${event.location}</p>
             <p class="event-description">${event.description}</p>
-            <a href="${event.link}" class="btn-event">Learn More</a>
+            <a href="${event.link}" class="btn-event" target="_blank">Learn More</a>
         `;
         container.appendChild(card);
     });
@@ -76,7 +85,6 @@ function renderPaginationControls(page) {
     const container = document.getElementById('pagination-controls');
     const totalPages = Math.ceil(allEvents.length / EVENTS_PER_PAGE);
 
-    // Only show controls if more than 1 page
     if (totalPages <= 1) {
         container.innerHTML = '';
         return;
@@ -96,11 +104,10 @@ function renderPaginationControls(page) {
 window.changePage = function(newPage) {
     currentPage = newPage;
     renderPage(newPage);
-    // Smooth scroll to top of events section
     document.querySelector('.events-container').scrollIntoView({ behavior: 'smooth' });
 };
 
-// 2. Countdown Logic (Kept from previous update)
+// 2. Countdown Logic
 function setupCountdown(events) {
     const now = new Date();
     const upcomingEvents = events
@@ -146,13 +153,13 @@ function initCountdownTimer(event) {
     updateTimer();
 }
 
-// 3. Organize Form Logic
+// 3. Organize Form Logic (Submits to Google Sheets)
 function initOrganizeForm() {
     const form = document.getElementById('organize-form');
     const feedback = document.getElementById('organize-feedback');
     
     if(form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = form.querySelector('button');
             const originalText = btn.innerText;
@@ -160,17 +167,46 @@ function initOrganizeForm() {
             btn.disabled = true;
             btn.innerText = "Submitting...";
 
-            // Simulate API Call
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.innerText = originalText;
-                
-                feedback.textContent = "✅ Proposal submitted successfully! We'll review it soon.";
+            // Gather Data
+            const formData = {
+                title: document.getElementById('event-title').value,
+                type: document.getElementById('event-type').value,
+                date: document.getElementById('event-date').value,
+                description: document.getElementById('event-desc').value
+            };
+
+            try {
+                // Send to Google Apps Script
+                // We use 'no-cors' mode which sends the data but returns an opaque response
+                // This is standard for simple Google Script integrations
+                await fetch(API_URL, {
+                    method: "POST",
+                    mode: "no-cors", 
+                    headers: {
+                        "Content-Type": "text/plain" // Required for no-cors to simple endpoints
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                // Assume success if no network error occurred
+                feedback.textContent = "✅ Proposal submitted! An admin will review it shortly.";
                 feedback.style.color = "#00c853";
+                feedback.className = "feedback-message success";
                 form.reset();
 
-                setTimeout(() => { feedback.textContent = ""; }, 5000);
-            }, 1500);
+            } catch (error) {
+                console.error("Submission Error:", error);
+                feedback.textContent = "❌ Submission failed. Please try again.";
+                feedback.style.color = "#ff5f56";
+                feedback.className = "feedback-message error";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = originalText;
+                setTimeout(() => { 
+                    feedback.textContent = ""; 
+                    feedback.className = "feedback-message";
+                }, 5000);
+            }
         });
     }
 }
