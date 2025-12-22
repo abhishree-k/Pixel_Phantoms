@@ -6,23 +6,56 @@ function renderFooter(basePath = '') {
                 <h3 class="footer-title">Pixel Phantoms</h3>
                 <p class="footer-description">Empowering the next generation of tech innovators through collaboration, learning, and creativity.</p>
                 <div class="social-links">
-                    <a href="https://github.com/sayeeg-11/Pixel_Phantoms" target="_blank" rel="noopener noreferrer" class="social-link github">
-                        <i class="fab fa-github" aria-hidden="true"></i>
-                        <span class="sr-only">Visit our GitHub repository</span>
-                    </a>
-                    <a class="social-link discord disabled" tabindex="-1">
-                        <i class="fab fa-discord" aria-hidden="true"></i>
-                        <span class="sr-only">Discord (Coming Soon)</span>
-                    </a>
-                    <a class="social-link linkedin disabled" tabindex="-1">
-                        <i class="fab fa-linkedin" aria-hidden="true"></i>
-                        <span class="sr-only">LinkedIn (Coming Soon)</span>
-                    </a>
-                    <a class="social-link email disabled" tabindex="-1">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                        <span class="sr-only">Email (Coming Soon)</span>
-                    </a>
-                </div>
+    <a
+  href="https://github.com/sayeeg-11/Pixel_Phantoms"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="social-link github"
+  aria-label="GitHub"
+>
+  <i class="fab fa-github"></i>
+</a>
+
+    <a
+  href="https://www.instagram.com/pixelphantoms_?igsh=aWxhbGhsM3piaHFj"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="social-link instagram"
+  aria-label="Instagram"
+>
+  <i class="fab fa-instagram" aria-hidden="true"></i>
+</a>
+
+<a
+  href="https://discord.com/channels/1049667734025289729/1440205974806986844"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="social-link discord"
+  aria-label="Discord"
+>
+  <i class="fab fa-discord" aria-hidden="true"></i>
+</a>
+
+<a
+  href="https://www.linkedin.com/company/pixel-phantoms/"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="social-link linkedin"
+  aria-label="LinkedIn"
+>
+  <i class="fab fa-linkedin" aria-hidden="true"></i>
+</a>
+
+<a
+  href="mailto:contact@pixelphantoms.com"
+  class="social-link email"
+  aria-label="Email"
+>
+  <i class="far fa-envelope" aria-hidden="true"></i>
+</a>
+
+</div>
+
             </div>
             <div class="footer-section">
                 <h4 class="footer-subtitle">Quick Links</h4>
@@ -51,7 +84,6 @@ function renderFooter(basePath = '') {
     </footer>
     `;
 
-    document.getElementById('footer-placeholder').innerHTML = footerHTML;
 }
 
 // Export function for use in other files

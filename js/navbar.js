@@ -180,7 +180,7 @@ function initMobileMenu() {
             
             if ((isAtTop && e.touches[0].clientY > touchStartY) || 
                 (isAtBottom && e.touches[0].clientY < touchStartY)) {
-                e.preventDefault();
+
             }
         }
     }, { passive: false });

@@ -3537,3 +3537,16 @@ main:focus {
         scroll-behavior: auto;
     }
 }
+
+/* Footer social links fix */
+
+.social-link {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 0.2s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.1);
+}

@@ -3699,7 +3699,6 @@ main:focus {
     .btn-hollow,
     .theme-toggle,
     .hamburger,
-    .social-links,
     .footer-newsletter,
     .newsletter-form,
     .input-group,
@@ -3752,8 +3751,6 @@ main:focus {
     .control-text,
     .leaderboard-preview::before,
     .site-footer::before,
-    .footer-bottom-links,
-    .site-footer .social-links,
     #cursor-highlight,
     .typing-indicator,
     .blink,
@@ -4111,3 +4108,14 @@ main:focus {
 .leaderboard-preview .share-button-container {
     bottom: 100px; 
 }
+
+/* FORCE social icons to always be visible */
+.footer-container,
+.footer-content,
+.social-links,
+.social-link {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
