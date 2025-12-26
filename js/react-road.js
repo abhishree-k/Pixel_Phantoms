@@ -7,13 +7,13 @@ function initReactRoadmap() {
     if (!container) return;
 
     const reactCurriculum = [
-        { title: "PHASE_01: React_Fundamentals", desc: "JSX, Elements, and the Virtual DOM.", modules: [{n:"JSX Syntax", u:"https://react.dev/learn/writing-markup-with-jsx"}, {n:"Components & Props", u:"https://react.dev/learn/passing-props-to-a-component"}] },
-        { title: "PHASE_02: State_&_Effect", desc: "Managing data and lifecycle with Hooks.", modules: [{n:"useState Hook", u:"https://react.dev/reference/react/useState"}, {n:"useEffect Hook", u:"https://react.dev/reference/react/useEffect"}] },
-        { title: "PHASE_03: Events_&_Forms", desc: "Handling user input and interactivity.", modules: [{n:"Responding to Events", u:"https://react.dev/learn/responding-to-events"}, {n:"Controlled Components", u:"https://react.dev/learn/sharing-state-between-components"}] },
-        { title: "PHASE_04: Advanced_Hooks", desc: "Optimizing and sharing logic.", modules: [{n:"useContext Hook", u:"https://react.dev/reference/react/useContext"}, {n:"useMemo & useCallback", u:"https://react.dev/reference/react/useMemo"}] },
-        { title: "PHASE_05: Routing_&_Navigation", desc: "Creating Multi-page SPAs.", modules: [{n:"React Router v6", u:"https://reactrouter.com/en/main"}, {n:"Protected Routes", u:"https://www.freecodecamp.org/news/how-to-create-protected-routes-in-react/"}] },
-        { title: "PHASE_06: State_Management", desc: "Scaling applications with global state.", modules: [{n:"Zustand Guide", u:"https://docs.pmnd.rs/zustand/getting-started/introduction"}, {n:"Redux Toolkit", u:"https://redux-toolkit.js.org/introduction/getting-started"}] },
-        { title: "PHASE_07: Fullstack_Ecosystem", desc: "Frameworks and Data Fetching.", modules: [{n:"Next.js Fundamentals", u:"https://nextjs.org/docs"}, {n:"React Query (TanStack)", u:"https://tanstack.com/query/latest/docs/framework/react/overview"}] }
+        { title: "PHASE_01: React_Fundamentals", desc: "Core concepts, Components, and Props.", modules: [{n:"Writing JSX", u:"https://react.dev/learn/writing-markup-with-jsx"}, {n:"Passing Props", u:"https://react.dev/learn/passing-props-to-a-component"}] },
+        { title: "PHASE_02: Hooks_&_State", desc: "Managing reactivity with useState and useEffect.", modules: [{n:"useState Guide", u:"https://react.dev/reference/react/useState"}, {n:"Lifecycle Effects", u:"https://react.dev/reference/react/useEffect"}] },
+        { title: "PHASE_03: Interactivity_&_Forms", desc: "Events handling and data input management.", modules: [{n:"Handling Events", u:"https://react.dev/learn/responding-to-events"}, {n:"Controlled Inputs", u:"https://react.dev/learn/sharing-state-between-components"}] },
+        { title: "PHASE_04: Performance_&_Optimization", desc: "Memoization and advanced hook patterns.", modules: [{n:"useMemo & useCallback", u:"https://react.dev/reference/react/useMemo"}, {n:"useRef & Context", u:"https://react.dev/reference/react/useContext"}] },
+        { title: "PHASE_05: Navigation_Protocol", desc: "Client-side routing and SPA architecture.", modules: [{n:"React Router Docs", u:"https://reactrouter.com/"}, {n:"Protected Routes", u:"https://www.freecodecamp.org/news/how-to-create-protected-routes-in-react/"}] },
+        { title: "PHASE_06: Global_State_Systems", desc: "Managing large-scale data flow.", modules: [{n:"Zustand (Modern)", u:"https://docs.pmnd.rs/zustand/"}, {n:"Redux Toolkit (Legacy/Corp)", u:"https://redux-toolkit.js.org/"}] },
+        { title: "PHASE_07: Fullstack_Ecosystem", desc: "SSR, SSG, and Data Fetching libraries.", modules: [{n:"Next.js Framework", u:"https://nextjs.org/docs"}, {n:"React Query", u:"https://tanstack.com/query/"}] }
     ];
 
     container.innerHTML = ''; 
@@ -42,6 +42,7 @@ function initReactRoadmap() {
         container.appendChild(node);
     });
 
+    // Initialize Animations
     gsap.from('.chapter-node', {
         scrollTrigger: { trigger: '.roadmap-wrapper', start: "top 80%" },
         opacity: 0,
