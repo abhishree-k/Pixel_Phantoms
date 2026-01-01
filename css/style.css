@@ -6502,3 +6502,543 @@ body.mobile-menu-open {
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.4);
     border-color: var(--accent-color);
 }
+
+/* ============================================
+   COMPREHENSIVE RESPONSIVE DESIGN ENHANCEMENTS
+   ============================================ */
+
+/* Base responsive typography scaling */
+:root {
+    --font-scale-mobile: 0.875;
+    --font-scale-tablet: 0.9375;
+    --font-scale-desktop: 1;
+}
+
+/* Improved container system */
+.container,
+.container-fluid {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive video and iframe */
+video,
+iframe,
+embed,
+object {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Touch-friendly targets (minimum 44x44px) */
+button,
+a,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.btn-primary,
+.btn-secondary,
+.btn-cyber {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 24px;
+}
+
+/* Improved spacing system for mobile */
+@media (max-width: 768px) {
+    :root {
+        --spacing-xs: 4px;
+        --spacing-sm: 6px;
+        --spacing-md: 12px;
+        --spacing-lg: 16px;
+        --spacing-xl: 24px;
+        --spacing-xxl: 32px;
+    }
+    
+    .container {
+        padding: 0 16px;
+    }
+    
+    /* Typography scaling */
+    h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); }
+    h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+    h3 { font-size: clamp(1.25rem, 3.5vw, 1.75rem); }
+    h4 { font-size: clamp(1.1rem, 3vw, 1.5rem); }
+    h5 { font-size: clamp(1rem, 2.5vw, 1.25rem); }
+    h6 { font-size: clamp(0.9rem, 2vw, 1.1rem); }
+    
+    p, li, span {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        line-height: 1.6;
+    }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 960px;
+        padding: 0 24px;
+    }
+    
+    h1 { font-size: clamp(2rem, 4vw, 3rem); }
+    h2 { font-size: clamp(1.75rem, 3.5vw, 2.25rem); }
+    h3 { font-size: clamp(1.5rem, 3vw, 1.875rem); }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+/* Improved navbar responsiveness */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 12px 24px;
+        margin: 0 12px;
+        width: calc(100% - 24px);
+    }
+    
+    .logo span {
+        font-size: clamp(18px, 2.5vw, 22px);
+    }
+    
+    .nav-links a {
+        padding: 10px 16px;
+        font-size: clamp(14px, 1.8vw, 16px);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 16px;
+        margin: 0 8px;
+        width: calc(100% - 16px);
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+    
+    .logo {
+        gap: 8px;
+    }
+    
+    .logo img {
+        width: clamp(32px, 5vw, 42px);
+        height: clamp(32px, 5vw, 42px);
+    }
+    
+    .logo span {
+        font-size: clamp(16px, 4vw, 20px);
+    }
+    
+    /* Improved mobile menu */
+    .nav-links {
+        top: 70px;
+        left: 8px;
+        right: 8px;
+        padding: 16px;
+        border-radius: 16px;
+        max-height: calc(100vh - 100px);
+    }
+    
+    .nav-links a {
+        padding: 14px 18px;
+        font-size: 16px;
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+/* Grid system improvements */
+.grid,
+.grid-2,
+.grid-3,
+.grid-4 {
+    display: grid;
+    gap: var(--spacing-lg, 20px);
+    width: 100%;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md, 16px);
+    }
+}
+
+/* Flexbox improvements */
+.flex,
+.flex-row,
+.flex-column {
+    display: flex;
+    width: 100%;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .flex-row {
+        flex-direction: column;
+    }
+    
+    .flex-row-mobile-column {
+        flex-direction: column;
+    }
+}
+
+/* Card responsiveness */
+.card,
+.card-body {
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--spacing-lg, 20px);
+}
+
+@media (max-width: 768px) {
+    .card,
+    .card-body {
+        padding: var(--spacing-md, 16px);
+        margin: 0;
+    }
+}
+
+/* Form responsiveness */
+form,
+.form-group,
+.input-group {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+textarea,
+select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px;
+}
+
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="search"],
+    textarea,
+    select {
+        padding: 14px 16px;
+        font-size: 16px;
+    }
+}
+
+/* Table responsiveness */
+table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 8px 12px;
+        white-space: nowrap;
+    }
+}
+
+/* Hero section responsiveness */
+.hero,
+.hero-section {
+    padding: clamp(80px, 10vw, 160px) 20px clamp(60px, 8vw, 100px);
+    min-height: auto;
+}
+
+.hero h1,
+.hero-section h1 {
+    font-size: clamp(2rem, 8vw, 4rem);
+    line-height: 1.2;
+    margin-bottom: clamp(16px, 3vw, 24px);
+}
+
+.hero p,
+.hero-section p {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .hero,
+    .hero-section {
+        padding: 100px 16px 60px;
+        text-align: center;
+    }
+    
+    .hero-buttons,
+    .hero-cta-group {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+    
+    .btn-primary,
+    .btn-secondary,
+    .btn-cyber {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Section spacing */
+section {
+    padding: clamp(40px, 6vw, 80px) 20px;
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 40px 16px;
+    }
+}
+
+/* Footer responsiveness */
+.site-footer,
+footer {
+    padding: clamp(40px, 5vw, 60px) 20px 20px;
+}
+
+.footer-content {
+    gap: clamp(24px, 4vw, 40px);
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 32px;
+    }
+    
+    .footer-brand,
+    .footer-links,
+    .footer-newsletter {
+        text-align: center;
+        align-items: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+/* Modal and overlay responsiveness */
+.modal,
+.modal-overlay {
+    padding: 20px;
+}
+
+.modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: auto;
+    padding: clamp(20px, 4vw, 40px);
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 95vw;
+        padding: 20px;
+        border-radius: 16px;
+    }
+}
+
+/* Utility classes for responsive design */
+.hide-mobile {
+    display: block;
+}
+
+.show-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+    
+    .show-mobile {
+        display: block !important;
+    }
+}
+
+/* Text alignment utilities */
+.text-left-mobile {
+    text-align: left;
+}
+
+.text-center-mobile {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .text-left-mobile {
+        text-align: left;
+    }
+    
+    .text-center-mobile {
+        text-align: center;
+    }
+}
+
+/* Spacing utilities */
+.mobile-padding {
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    .mobile-padding {
+        padding: 0 16px;
+    }
+}
+
+/* Improved scroll behavior */
+@media (max-width: 768px) {
+    html {
+        scroll-padding-top: 80px;
+    }
+    
+    * {
+        -webkit-tap-highlight-color: rgba(0, 170, 255, 0.2);
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero,
+    .hero-section {
+        padding: 80px 16px 40px;
+        min-height: auto;
+    }
+    
+    .navbar {
+        padding: 8px 16px;
+    }
+    
+    .nav-links {
+        max-height: calc(100vh - 80px);
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .hamburger,
+    .footer,
+    .btn,
+    button,
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    
+    main {
+        padding-top: 0;
+    }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi) {
+    img,
+    .logo img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Dark mode responsive adjustments */
+[data-theme="dark"] {
+    /* Ensure proper contrast on all screen sizes */
+}
+
+@media (max-width: 768px) {
+    [data-theme="dark"] .card,
+    [data-theme="dark"] .card-body {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+    }
+}

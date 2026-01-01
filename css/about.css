@@ -48,7 +48,7 @@
 .hero-title {
     font-size: 3.5rem;
     font-weight: 800;
-    color: white;
+    color: var(--text-primary, #ffffff);
     margin-bottom: 20px;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     letter-spacing: 1px;
@@ -83,6 +83,11 @@
     transform: translateX(-50%) scaleX(0);
 }
 
+/* Dark mode adjustments for hero section */
+[data-theme="dark"] .hero-title::after {
+    background: rgba(255, 255, 255, 0.8);
+}
+
 @keyframes expandWidth {
     to {
         transform: translateX(-50%) scaleX(1);
@@ -102,7 +107,7 @@
 .motto {
     font-size: 1.8rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--text-primary, rgba(255, 255, 255, 0.95));
     font-style: italic;
     position: relative;
     display: inline-block;
@@ -114,6 +119,13 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     animation: bounceIn 1.2s ease-out 0.8s both;
+}
+
+/* Dark mode adjustments for motto */
+[data-theme="dark"] .motto {
+    color: var(--text-primary, #ffffff);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 @keyframes bounceIn {
@@ -165,6 +177,12 @@
     bottom: -15px;
     font-size: 3rem;
     color: rgba(255, 255, 255, 0.3);
+}
+
+/* Dark mode adjustments for motto quotes */
+[data-theme="dark"] .motto::before,
+[data-theme="dark"] .motto::after {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 /* Content Sections */
@@ -1217,8 +1235,8 @@
     }
     
     .motto {
-        background: white;
-        color: black;
+        background: var(--text-primary);
+        color: var(--bg-primary);
     }
     
     .focus-card,
@@ -1226,6 +1244,25 @@
     .mission-description {
         border: 2px solid var(--text-primary);
     }
+}
+
+/* Dark mode specific adjustments for hero section */
+[data-theme="dark"] .hero-section {
+    background: linear-gradient(135deg, var(--accent-color), #0088cc);
+}
+
+[data-theme="dark"] .hero-section::before {
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .hero-title {
+    color: var(--text-primary, #ffffff);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .motto:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* Focus indicators for keyboard navigation */

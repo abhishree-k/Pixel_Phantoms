@@ -17,16 +17,44 @@
   will-change: transform;
 }
 
+/* Cursor particles - dynamic glowing elements */
+.cursor-particle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-color, #00aaff), transparent);
+  pointer-events: none;
+  z-index: 998;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  will-change: transform, opacity;
+  animation: particleFadeOut 1.5s ease-out forwards;
+}
+
+@keyframes particleFadeOut {
+  0% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) translateY(-30px);
+  }
+}
+
 /* Hide on touch devices */
 @media (pointer: coarse) {
-  #cursor-highlight {
+  #cursor-highlight,
+  .cursor-particle {
     display: none;
   }
 }
 
 /* Hide on mobile viewports */
 @media (max-width: 768px) {
-  #cursor-highlight {
+  #cursor-highlight,
+  .cursor-particle {
     display: none;
   }
 }
@@ -36,6 +64,10 @@
   #cursor-highlight {
     transition: none;
   }
+  
+  .cursor-particle {
+    display: none;
+  }
 }
 
 /* Dark theme specific adjustments */
@@ -43,7 +75,17 @@
   opacity: 0.15;
 }
 
+[data-theme='dark'] .cursor-particle {
+  background: radial-gradient(circle, var(--accent-color, #00aaff), transparent);
+  box-shadow: 0 0 10px var(--accent-color, #00aaff);
+}
+
 /* Light theme specific adjustments */
 [data-theme='light'] #cursor-highlight {
   opacity: 0.08;
+}
+
+[data-theme='light'] .cursor-particle {
+  background: radial-gradient(circle, var(--accent-color, #00aaff), transparent);
+  opacity: 0.6;
 }
